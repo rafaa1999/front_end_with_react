@@ -2,12 +2,14 @@
 // library socket.io-client
 import io from "socket.io-client"
 // connect to the sever socket 
-const socket = io.connect("http://localhost:3001/")
+const socket = io.connect("http://localhost:3001")
 
 function App() {
  
   const sendMessge=()=>{
-  //  socket.emit()
+    // emit just for send events
+    //emit("event_name","message")
+   socket.emit("send_message",{message:"hello"})
   }
   return (
     <div>

@@ -24,7 +24,7 @@ const server = http.createServer(app)
 // we deal with it and some methods
 const io=new Server(server,{
     cors:{
-        origin:"http://localhost:3000/",
+        origin:"http://localhost:3000",
         methods:["GET","POST"]
     }
 })
@@ -35,6 +35,11 @@ const io=new Server(server,{
 io.on("connection",(socket)=>{
 // verification of connection front -> back
     console.log(`user connected:${socket.id}`)
+
+    // get the event from client
+    socket.on("send_message",(data)=>{
+            console.log(data)
+    })
 
 })
 
