@@ -38,7 +38,10 @@ io.on("connection",(socket)=>{
 
     // get the event from client
     socket.on("send_message",(data)=>{
-            console.log(data)
+    // take an event form one user
+    // and then broadcasts to all user
+    // that they listen to the same socket       
+        socket.broadcast.emit("receive_message".data)
     })
 
 })
