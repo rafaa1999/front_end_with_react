@@ -24,11 +24,19 @@ const server = http.createServer(app)
 // we deal with it and some methods
 const io=new Server(server,{
     cors:{
-        origin:"http://localhost:3000",
+        origin:"http://localhost:3000/",
         methods:["GET","POST"]
     }
 })
 
+ // using the backen like a layer
+// to connect events
+// listen to events
+io.on("connection",(socket)=>{
+// verification of connection front -> back
+    console.log(`user connected:${socket.id}`)
+
+})
 
 server.listen(3001,()=>{
     console.log("server is running")
