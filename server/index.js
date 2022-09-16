@@ -29,19 +29,35 @@ const io=new Server(server,{
     }
 })
 
- // using the backen like a layer
+ // using the backend like a layer
 // to connect events
 // listen to events
 io.on("connection",(socket)=>{
 // verification of connection front -> back
     console.log(`user connected:${socket.id}`)
 
+    // for building room : is like
+    //  the channel that only users
+    // who have the same room_id
+    // can join
+    socket.on("join_room",(data)=>{
+        socket.join(data)
+    })
+
     // get the event from client
     socket.on("send_message",(data)=>{
     // take an event form one user
     // and then broadcasts to all user
-    // that they listen to the same socket       
-        socket.broadcast.emit("receive_message".data)
+    // that they listen to the same socket  
+    // emit is an event
+    // always we opt to send an event   
+
+      /**
+       * socket.broadcast.emit("receive_message",data) 
+       * */
+
+    // send that event to the same room
+    socket.to(data.room).emit("receive_message",data)
     })
 
 })
